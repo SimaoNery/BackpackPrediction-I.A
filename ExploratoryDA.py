@@ -1,25 +1,15 @@
-import numpy as np
 import pandas as pd
 from scipy import stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import time
-from sklearn.preprocessing import LabelEncoder
 import warnings
 
 
 class ExploratoryDA:
 
     def __init__(self, file_path, target_col, correlation_timeout=60):
-        """
-        Initialize the EDA class.
-
-        Args:
-            file_path (str): Path to the dataset file
-            target_col (str): Name of the target column
-            correlation_timeout (int): Maximum time in seconds for correlation analysis
-        """
         self.file_path = file_path
         self.target_col = target_col
         self.dataset_name = os.path.splitext(os.path.basename(file_path))[0]
@@ -35,7 +25,6 @@ class ExploratoryDA:
         warnings.filterwarnings('ignore')
 
     def _setup_output_directory(self):
-        """Set up the output directory structure"""
         main_dir = "EDA_Results"
         os.makedirs(main_dir, exist_ok=True)
 
@@ -45,7 +34,6 @@ class ExploratoryDA:
         return dataset_dir
 
     def load_data(self):
-        """Load data from CSV file"""
         self.frame = pd.read_csv(self.file_path)
         print(f"\nDataset loaded: {self.dataset_name}")
         print(f"   Rows: {self.frame.shape[0]}, Columns: {self.frame.shape[1]}")
@@ -53,7 +41,6 @@ class ExploratoryDA:
         return self.frame
 
     def analyze_basic_info(self):
-        """Print and visualize basic information about the dataset"""
         print("\n" + "=" * 50)
         print("BASIC DATASET INFORMATION")
         print("=" * 50)
