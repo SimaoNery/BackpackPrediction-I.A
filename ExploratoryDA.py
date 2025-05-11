@@ -131,6 +131,36 @@ class ExploratoryDA:
 
         return missing_data[missing_data['Count'] > 0]
 
+    def check_duplicates(self, id_col=None):
+        print("\n" + "=" * 50)
+        print("DUPLICATE ROWS ANALYSIS")
+        print("=" * 50)
+
+        # Create duplicates directory
+        dup_dir = os.path.join(self.output_dir, "duplicates")
+        os.makedirs(dup_dir, exist_ok=True)
+
+        if id_col:
+            duplicates = self.frame[self.frame.duplicated(subset=[id_col], keep=False)]
+            print(f"\nChecking duplicates based on ID column: {id_col}")
+        else:
+            duplicates = self.frame[self.frame.duplicated(keep=False)]
+            print("\nChecking for fully duplicated rows")
+
+        if not duplicates.empty:
+            print(f"\nFound {len(duplicates)} duplicate rows")
+            print("\nSample of duplicate rows:")
+            print(duplicates.head())
+
+            dup_file = os.path.join(dup_dir, "duplicates.csv")
+            duplicates.to_csv(dup_file, index=False)
+            print(f"\nSaved duplicate rows to {dup_file}")
+        else:
+            print("\nNo duplicate rows found")
+
+        return duplicates
+
+
     def analyze_target_variable(self):
         """Analyze and visualize the target variable"""
         print("\n" + "=" * 50)
@@ -466,6 +496,7 @@ class ExploratoryDA:
         self.load_data()
         self.analyze_basic_info()
         self.analyze_missing_values()
+        self.check_duplicates(id_col='id')
         self.analyze_target_variable()
         self.analyze_feature_distributions()
         self.analyze_price_correlations()
