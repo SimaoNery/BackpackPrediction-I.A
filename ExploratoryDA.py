@@ -84,6 +84,7 @@ class ExploratoryDA:
         plt.title('Column Data Type Distribution', fontsize=15)
         plt.tight_layout()
         plt.savefig(os.path.join(info_dir, 'data_type_distribution.png'), dpi=300)
+        plt.show()
         plt.close()
 
     def analyze_missing_values(self):
@@ -115,6 +116,7 @@ class ExploratoryDA:
             sns.heatmap(self.frame.isnull(), cbar=False, cmap='viridis')
             plt.tight_layout()
             plt.savefig(os.path.join(missing_dir, 'missing_values_heatmap.png'), dpi=300)
+            plt.show()
 
             # Create bar chart of missing values percentage
             plt.figure(figsize=(12, 6))
@@ -125,6 +127,7 @@ class ExploratoryDA:
             plt.ylabel('Missing Values (%)')
             plt.tight_layout()
             plt.savefig(os.path.join(missing_dir, 'missing_values_percent.png'), dpi=300)
+            plt.show()
             plt.close()
 
             print(f"    Saved missing values visualizations to {missing_dir}")
@@ -189,6 +192,7 @@ class ExploratoryDA:
             sns.histplot(self.frame[self.target_col], kde=True)
             plt.tight_layout()
             plt.savefig(os.path.join(target_dir, f'{self.target_col}_distribution.png'), dpi=300)
+            plt.show()
             plt.close()
 
             # Box plot
@@ -197,6 +201,7 @@ class ExploratoryDA:
             sns.boxplot(y=self.frame[self.target_col])
             plt.tight_layout()
             plt.savefig(os.path.join(target_dir, f'{self.target_col}_boxplot.png'), dpi=300)
+            plt.show()
             plt.close()
 
             # QQ plot to check normality
@@ -205,6 +210,7 @@ class ExploratoryDA:
             plt.title(f'Q-Q Plot of {self.target_col}', fontsize=15)
             plt.tight_layout()
             plt.savefig(os.path.join(target_dir, f'{self.target_col}_qqplot.png'), dpi=300)
+            plt.show()
             plt.close()
 
             print(f"    Saved target variable visualizations to {target_dir}")
@@ -229,6 +235,7 @@ class ExploratoryDA:
 
             plt.tight_layout()
             plt.savefig(os.path.join(target_dir, f'{self.target_col}_countplot.png'), dpi=300)
+            plt.show()
             plt.close()
 
             # Pie chart for target distribution
@@ -241,6 +248,7 @@ class ExploratoryDA:
                            loc="center left", bbox_to_anchor=(1, 0, 0.5, 1))
             plt.tight_layout()
             plt.savefig(os.path.join(target_dir, f'{self.target_col}_pie_chart.png'), dpi=300)
+            plt.show()
             plt.close()
 
             print(f"    Saved target variable visualizations to {target_dir}")
@@ -279,6 +287,7 @@ class ExploratoryDA:
                 plt.title(col)
             plt.tight_layout()
             plt.savefig(os.path.join(dist_dir, 'numerical_distributions.png'), dpi=300)
+            plt.show()
             plt.close()
 
             # Box plots for numerical features (up to 16)
@@ -289,6 +298,7 @@ class ExploratoryDA:
                 plt.title(col)
             plt.tight_layout()
             plt.savefig(os.path.join(dist_dir, 'numerical_boxplots.png'), dpi=300)
+            plt.show()
             plt.close()
 
             print(f"    Saved numerical feature distributions to {dist_dir}")
@@ -323,6 +333,7 @@ class ExploratoryDA:
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(dist_dir, f'{col}_countplot.png'), dpi=300)
+                plt.show()
                 plt.close()
 
             if len(categorical_cols) > 10:
@@ -386,6 +397,7 @@ class ExploratoryDA:
             plt.barh(target_pearson.head(5).index, target_pearson.head(5).values)
             plt.title('Top 5 Pearson Correlations with Price')
             plt.savefig(os.path.join(corr_dir, 'pearson_correlations_price.png'))
+            plt.show()
             plt.close()
 
         else:
@@ -422,6 +434,7 @@ class ExploratoryDA:
             plt.barh(target_spearman.head(5).index, target_spearman.head(5).values)
             plt.title('Top 5 Spearman Correlations with Price')
             plt.savefig(os.path.join(corr_dir, 'spearman_correlations_price.png'))
+            plt.show()
             plt.close()
 
         # Check timeout
@@ -476,6 +489,7 @@ class ExploratoryDA:
                 plt.barh(cat_impact_df.head(5)['feature'], cat_impact_df.head(5)['f_statistic'])
                 plt.title('Top 5 Categorical Features Impact')
                 plt.savefig(os.path.join(corr_dir, 'categorical_impact_price.png'))
+                plt.show()
                 plt.close()
             else:
                 print("No categorical features had significant impact on price")
