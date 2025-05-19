@@ -16,12 +16,13 @@ if __name__ == "__main__":
     # plot_price_distribution(processed_datasets[1])
 
     price_datasets = [
-        {'file_path': 'Data/train_with_categories.csv', 'target': 'Price_Category'},
-        {'file_path': 'Data/training_extra_with_categories.csv', 'target': 'Price_Category'}
+        {'file_path': 'Data/train_with_categories.csv'},
+        {'file_path': 'Data/training_extra_with_categories.csv'}
     ]
     
     # Exploratory Data Analysis
-    run_exploratory_da(price_datasets, 'Price_Category', 60)
+    for dataset in price_datasets:
+        run_exploratory_da(dataset['file_path'], 'Price_Category', 60)
 
     """
     # Data Preprocessing
